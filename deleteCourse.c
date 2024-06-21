@@ -10,6 +10,7 @@ void deleteCourse(Course** head, int courseID) {
     if (temp != NULL && temp->courseID == courseID) {
         *head = temp->next; // Changed head
         free(temp); // Free old head
+        printf("Course deleted successfully\n");
         return;
     }
 
@@ -20,10 +21,14 @@ void deleteCourse(Course** head, int courseID) {
     }
 
     // If courseID was not present in list
-    if (temp == NULL) return;
+    if (temp == NULL) {
+        printf("Course with ID %d not found\n", courseID);
+        return;
+    }
 
     // Unlink the node from linked list
     prev->next = temp->next;
 
     free(temp); // Free memory
+    printf("Course deleted successfully\n");
 }
