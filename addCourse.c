@@ -1,62 +1,70 @@
-#include "course.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Global variables
-struct Course *courses = NULL; // Array to store courses (dynamic allocation)
-int numCourses = 0; // Current number of courses
+// Define the structure for storing course information
+typedef struct Course {
+    int courseID;
+    char courseName[100];
+    int credits;
+    struct Course* next;
+} Course;
 
-// Function to add a new course
-void addCourse(const char* code, const char* name) {
-    // Allocate memory for a new course
-    struct Course *newCourse = (struct Course *)malloc(sizeof(struct Course));
-    
+// Function to add a course
+void addCourse(Course** head, int courseID, const char* courseName, int credits) {
+    // Allocate memory for the new course
+    Course* newCourse = (Course*)malloc(sizeof(Course));
     if (newCourse == NULL) {
-        printf("Memory allocation failed. Course could not be added.\n");
+        printf("Memory allocation failed\n");
         return;
     }
     
-    // Copy course code and name into the new course structure
-    strncpy(newCourse->code, code, sizeof(newCourse->code) - 1);
-    newCourse->code[sizeof(newCourse->code) - 1] = '\0'; // Ensure null-terminated
-    strncpy(newCourse->name, name, sizeof(newCourse->name) - 1);
-    newCourse->name[sizeof(newCourse->name) - 1] = '\0'; // Ensure null-terminated
+    // Initialize the new course
+    newCourse->courseID = courseID;
+    strncpy(newCourse->courseName, courseName, sizeof(newCourse->courseName) - 1);
+    newCourse->courseName[sizeof(newCourse->courseName) - 1] = '\0';
+    newCourse->credits = credits;
+    newCourse->next = *head;
     
-    // Increase the number of courses
-    numCourses++;
+    // Insert the new course at the beginning of the list
+    *head = newCourse;
     
-    // Resize the courses array to accommodate the new course
-    courses = (struct Course *)realloc(courses, numCourses * sizeof(struct Course));
-    
-    if (courses == NULL) {
-        printf("Memory reallocation failed. Course could not be added.\n");
-        free(newCourse); // Free allocated memory for newCourse
-        return;
+    printf("Course added successfully\n");
+}
+
+// Function to print the list of courses (for testing purposes)
+void printCourses(Course* head) {
+    Course* current = head;
+    while (current != NULL) {
+        printf("Course ID: %d, Name: %s, Credits: %d\n", current->courseID, current->courseName, current->credits);
+        current = current->next;
     }
-    
-    // Add the new course to the array
-    courses[numCourses - 1] = *newCourse;
-    
-    // Free allocated memory for newCourse (no longer needed)
-    free(newCourse);
-    
-    printf("Course with code %s added successfully.\n", code);
+}
+
+// Function to free the memory of the list (to avoid memory leaks)
+void freeCourses(Course* head) {
+    Course* current = head;
+    Course* nextCourse;
+    while (current != NULL) {
+        nextCourse = current->next;
+        free(current);
+        current = nextCourse;
+    }
 }
 
 int main() {
-    // Example: Adding courses
-    addCourse("CSCI101", "Introduction to Computer Science");
-    addCourse("MATH201", "Calculus I");
+    Course* head = NULL; // Initialize the head of the list to NULL
     
-    // Print all courses (for demonstration purposes)
-    printf("All Courses:\n");
-    for (int i = 0; i < numCourses; ++i) {
-        printf("Code: %s, Name: %s\n", courses[i].code, courses[i].name);
-    }
+    // Add some courses
+    addCourse(&head, 101, "Mathematics", 3);
+    addCourse(&head, 102, "Physics", 4);
+    addCourse(&head, 103, "Chemistry", 3);
     
-    // Clean up: Free allocated memory for courses array
-    free(courses);
+    // Print the courses to verify they are added
+    printCourses(head);
+    
+    // Free the allocated memory
+    freeCourses(head);
     
     return 0;
 }
