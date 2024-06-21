@@ -26,36 +26,24 @@ void delete_course(int id) {
         printf("Course with ID %d not found.\n", id);
         return;
     }
-//Denisi
-   // Shift the courses to fill the gap left by the deleted course
-for (int i = index; i < courseCount - 1; i++) {
-    courses[i] = courses[i + 1];  // Each course is moved one position left in the array.
-}
 
+    // Task for Team Member 2: Implement the array shift logic
+    // Shift the courses to fill the gap left by the deleted course
+    for (int i = index; i < courseCount - 1; i++) {
+        courses[i] = courses[i + 1];
     }
-//elijesa
-// Task for Team Member 3: Handle memory reallocation
+
+    // Task for Team Member 3: Handle memory reallocation
     // Decrease the course count
     courseCount--;
 
-    // Reallocate memory to resize the courses array only if there are remaining courses
-    if (courseCount > 0) {
-        Course* temp = realloc(courses, courseCount * sizeof(Course));
+    // Reallocate memory to resize the courses array
+    courses = realloc(courses, courseCount * sizeof(Course));
 
-        // Check if memory reallocation was successful
-        if (temp == NULL) {
-            fprintf(stderr, "Memory reallocation failed\n");
-            exit(1);
-        }
-
-        courses = temp;
-    } else {
-        // If there are no remaining courses, free the allocated memory and set courses to NULL
-        free(courses);
-        courses = NULL;
-    }
-}
-    
+    // Check if memory reallocation was successful
+    if (courseCount > 0 && courses == NULL) {
+        fprintf(stderr, "Memory reallocation failed\n");
+        exit(1);
     }
 
     printf("Course with ID %d deleted successfully.\n", id);
