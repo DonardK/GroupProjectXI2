@@ -7,4 +7,3 @@
 void deleteCourse(Course** head, int courseID);
 
 #endif // DELETE_COURSE_H
-    

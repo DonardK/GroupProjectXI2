@@ -24,23 +24,3 @@ void addCourse(Course** head, int courseID, const char* courseName, int credits)
     
     printf("Course added successfully\n");
 }
-
-// Function to print the list of courses (for testing purposes)
-void printCourses(Course* head) {
-    Course* current = head;
-    while (current != NULL) {
-        printf("Course ID: %d, Name: %s, Credits: %d\n", current->courseID, current->courseName, current->credits);
-        current = current->next;
-    }
-}
-
-// Function to free the memory of the list (to avoid memory leaks)
-void freeCourses(Course* head) {
-    Course* current = head;
-    Course* nextCourse;
-    while (current != NULL) {
-        nextCourse = current->next;
-        free(current);
-        current = nextCourse;
-    }
-}
