@@ -12,6 +12,6 @@ typedef struct Course {
 // Common function declarations
 void addCourse(Course** head, int courseID, const char* courseName, int credits);
 void printCourses(Course* head);
-void freeCourses(Course* head);
+void freeCourses(Course* head);  // Add this line
 
 #endif // COURSE_H

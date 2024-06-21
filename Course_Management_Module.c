@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "course.h"
 #include "addCourse.h"
 #include "deleteCourse.h"
 #include "searchCourseByCode.h"
 #include "displayAllCourses.h"
 #include "searchCourseByName.h"
-
 
 void displayMenu() {
     printf("\nCourse Management System\n");
@@ -34,7 +34,7 @@ int main() {
                 printf("Enter Course ID: ");
                 scanf("%d", &courseID);
                 printf("Enter Course Name: ");
-                scanf("%s", courseName);
+                scanf("%s", &courseName);
                 printf("Enter Credits: ");
                 scanf("%d", &credits);
                 addCourse(&head, courseID, courseName, credits);
