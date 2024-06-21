@@ -1,18 +1,10 @@
-#ifndef DELETECOURSE_H
-#define DELETECOURSE_H
+#ifndef DELETE_COURSE_H
+#define DELETE_COURSE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "course.h"
 
-typedef struct {
-    int courseID;
-    char courseName[100];
-} Course;
+// Function declaration for deleting a course
+void deleteCourse(Course** head, int courseID);
 
-extern Course* courses;
-extern int courseCount;
-
-void delete_course(int id);
-
-#endif // DELETECOURSE_H
+#endif // DELETE_COURSE_H
+    

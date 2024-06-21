@@ -1,7 +1,5 @@
-#ifndef SEARCH_COURSE_BY_CODE_H
-#define SEARCH_COURSE_BY_CODE_H
-
-#include "course.h"
+#ifndef COURSE_H
+#define COURSE_H
 
 // Define the structure for storing course information
 typedef struct Course {
@@ -11,10 +9,9 @@ typedef struct Course {
     struct Course* next;
 } Course;
 
-// Function declarations
+// Common function declarations
 void addCourse(Course** head, int courseID, const char* courseName, int credits);
-Course* searchCourseByCode(Course* head, int courseID);
 void printCourses(Course* head);
 void freeCourses(Course* head);
 
-#endif // SEARCH_COURSE_BY_CODE_H
+#endif // COURSE_H

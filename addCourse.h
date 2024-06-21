@@ -1,5 +1,7 @@
-#ifndef COURSE_MANAGEMENT_H
-#define COURSE_MANAGEMENT_H
+#ifndef ADD_COURSE_H
+#define ADD_COURSE_H
+
+#include "course.h"
 
 // Define the structure for storing course information
 typedef struct Course {

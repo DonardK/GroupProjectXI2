@@ -1,6 +1,8 @@
 #ifndef SEARCH_COURSE_BY_NAME_H
 #define SEARCH_COURSE_BY_NAME_H
 
+#include "course.h"
+
 // Define the structure for storing course information
 typedef struct Course {
     int courseID;

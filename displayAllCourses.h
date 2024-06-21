@@ -1,10 +1,9 @@
-// displayAllCourses.h
-#ifndef DISPLAYALLCOURSES_H
-#define DISPLAYALLCOURSES_H
+#ifndef DISPLAY_ALL_COURSES_H
+#define DISPLAY_ALL_COURSES_H
 
-#include <stdio.h>
-#include "deleteCourse.h"  // Include this to get access to the Course struct and global variables
+#include "course.h"
 
-void displayAllCourses();
+// Function declaration for displaying all courses
+void displayAllCourses(Course* head);
 
-#endif // DISPLAYALLCOURSES_H
+#endif // DISPLAY_ALL_COURSES_H

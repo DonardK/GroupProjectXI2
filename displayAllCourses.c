@@ -1,17 +1,11 @@
-// displayAllCourses.c
+#include <stdio.h>
 #include "displayAllCourses.h"
 
-/**
- * Function to display all courses with formatted output for better readability.
- */
-void displayAllCourses() {
-    printf("+-----------+--------------------------+\n");
-    printf("| Course ID | Course Name              |\n");
-    printf("+-----------+--------------------------+\n");
-
-    for (int i = 0; i < courseCount; i++) {
-        printf("| %9d | %-24s |\n", courses[i].courseID, courses[i].courseName);
+// Function to print the list of courses
+void displayAllCourses(Course* head) {
+    Course* current = head;
+    while (current != NULL) {
+        printf("Course ID: %d, Name: %s, Credits: %d\n", current->courseID, current->courseName, current->credits);
+        current = current->next;
     }
-
-    printf("+-----------+--------------------------+\n");
 }
