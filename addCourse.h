@@ -1,14 +1,17 @@
-#ifndef COURSE_H_
-#define COURSE_H_
+#ifndef COURSE_MANAGEMENT_H
+#define COURSE_MANAGEMENT_H
 
-// Define a structure to store course information
-struct Course {
-    char code[20];
-    char name[50];
-    // Add more fields as needed (e.g., instructor, credits, etc.)
-};
+// Define the structure for storing course information
+typedef struct Course {
+    int courseID;
+    char courseName[100];
+    int credits;
+    struct Course* next;
+} Course;
 
-// Function prototypes
-void addCourse(const char* code, const char* name);
+// Function declarations
+void addCourse(Course** head, int courseID, const char* courseName, int credits);
+void printCourses(Course* head);
+void freeCourses(Course* head);
 
-#endif /* COURSE_H_ */
+#endif // COURSE_MANAGEMENT_H
