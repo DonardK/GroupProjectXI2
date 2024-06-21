@@ -23,3 +23,9 @@ Student* searchStudentByID(StudentList* list, int id) {
             return &list->students[i];
         }
 
+
+
+// Add some students to the list
+    list.students[0] = (Student){1, "Alice", 20};
+    list.students[1] = (Student){2, "Bob", 21};
+    list.students[2] = (Student){3, "Charlie", 22};
