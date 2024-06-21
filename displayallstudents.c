@@ -29,3 +29,11 @@ int main() {
     list.students = (Student)malloc(3 sizeof(Student));
     list.count = 3;
     list.capacity = 3;
+// Display all students
+    displayAllStudents(&list);
+
+    // Free the allocated memory for the students array
+    free(list.students);
+
+    return 0;
+}
