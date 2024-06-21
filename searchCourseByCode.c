@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "searchCourseByCode.h"
 
-Course* searchCourseByCode(Course* head, int courseID) {
+Course* searchCourseByCode(Course* head, const char* courseID) {
     Course* current = head;
     while (current != NULL) {
-        if (current->courseID == courseID) {
+        if (strcmp(current->courseID, courseID) == 0) {
             return current;
         }
         current = current->next;

@@ -23,15 +23,15 @@ void displayMenu()
 
 void handleMenuChoice(int choice, Course** head)
 {
-    int courseID, credits;
-    char courseName[100];
+    char courseID[20], courseName[100];
+    int credits;
     Course* result;
 
     switch (choice)
     {
     case 1:
         printf("Enter Course ID: ");
-        scanf("%d", &courseID);
+        scanf("%s", courseID);
         while (getchar() != '\n'); // Clear the newline character from the buffer
         printf("Enter Course Name: ");
         fgets(courseName, sizeof(courseName), stdin);
@@ -45,16 +45,16 @@ void handleMenuChoice(int choice, Course** head)
 
     case 2:
         printf("Enter Course ID to delete: ");
-        scanf("%d", &courseID);
+        scanf("%s", courseID);
         deleteCourse(head, courseID);
         break;
     case 3:
         printf("Enter Course ID to search: ");
-        scanf("%d", &courseID);
+        scanf("%s", courseID);
         result = searchCourseByCode(*head, courseID);
         if (result != NULL)
         {
-            printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
+            printf("Course found: ID: %s, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
         }
         else
         {
@@ -67,7 +67,7 @@ void handleMenuChoice(int choice, Course** head)
         result = searchCourseByName(*head, courseName);
         if (result != NULL)
         {
-            printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
+            printf("Course found: ID: %s, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
         }
         else
         {
