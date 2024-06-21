@@ -8,6 +8,7 @@ typedef struct Student {
     char name[100];
     int age;
 } Student;
+
 typedef struct StudentList {
     Student* students;
     int count;
@@ -15,15 +16,22 @@ typedef struct StudentList {
 } StudentList;
 
 void initStudentList(StudentList* list, int capacity) {
-    list->students = (Student)malloc(capacity sizeof(Student));
+    list->students = (Student*)malloc(capacity * sizeof(Student));
     list->count = 0;
     list->capacity = capacity;
+}
+
 void addStudent(StudentList* list, int id, const char* name, int age) {
     // Check if we need to resize the array
     if (list->count == list->capacity) {
-        list->capacity = 2;
-        list->students = (Student)realloc(list->students, list->capacity * sizeof(Student));
+        list->capacity *= 2;
+        list->students = (Student*)realloc(list->students, list->capacity * sizeof(Student));
     }
+    list->students[list->count].id = id;
+    strcpy(list->students[list->count].name, name);
+    list->students[list->count].age = age;
+    list->count++;
+}
 
 int main() {
     StudentList list; // Declare a StudentList
