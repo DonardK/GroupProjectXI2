@@ -7,8 +7,6 @@
 #include "displayAllCourses.h"
 #include "searchCourseByName.h"
 
-#include "course.h"
-//after all the functions are added in course_management.h then you cant uncomment the row above this comment
 
 void displayMenu() {
     printf("\nCourse Management System\n");
