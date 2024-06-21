@@ -3,7 +3,6 @@
 #include <string.h>
 #include "searchCourseByName.h"
 
-// Function to search for a course by its name
 Course* searchCourseByName(Course* head, const char* courseName) {
     Course* current = head;
     while (current != NULL) {

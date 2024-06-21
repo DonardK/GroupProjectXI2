@@ -7,8 +7,10 @@
 #include "searchCourseByCode.h"
 #include "displayAllCourses.h"
 #include "searchCourseByName.h"
+#include "freeCourses.h"
 
-void displayMenu() {
+void displayMenu()
+{
     printf("\nCourse Management System\n");
     printf("1. Add Course\n");
     printf("2. Delete Course\n");
@@ -19,61 +21,86 @@ void displayMenu() {
     printf("Enter your choice: ");
 }
 
-int main() {
-    Course* head = NULL;
-    int choice, courseID, credits;
+void handleMenuChoice(int choice, Course** head)
+{
+    int courseID, credits;
     char courseName[100];
     Course* result;
 
-    while (1) {
-        displayMenu();
-        scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        printf("Enter Course ID: ");
+        scanf("%d", &courseID);
+        while (getchar() != '\n'); // Clear the newline character from the buffer
+        printf("Enter Course Name: ");
+        fgets(courseName, sizeof(courseName), stdin);
+        courseName[strcspn(courseName, "\n")] = '\0'; // Remove the newline character from the input
 
-        switch (choice) {
-            case 1:
-                printf("Enter Course ID: ");
-                scanf("%d", &courseID);
-                printf("Enter Course Name: ");
-                scanf("%s", &courseName);
-                printf("Enter Credits: ");
-                scanf("%d", &credits);
-                addCourse(&head, courseID, courseName, credits);
-                break;
-            case 2:
-                printf("Enter Course ID to delete: ");
-                scanf("%d", &courseID);
-                deleteCourse(&head, courseID);
-                break;
-            case 3:
-                printf("Enter Course ID to search: ");
-                scanf("%d", &courseID);
-                result = searchCourseByCode(head, courseID);
-                if (result != NULL) {
-                    printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
-                } else {
-                    printf("Course not found.\n");
-                }
-                break;
-            case 4:
-                printf("Enter Course Name to search: ");
-                scanf("%s", courseName);
-                result = searchCourseByName(head, courseName);
-                if (result != NULL) {
-                    printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
-                } else {
-                    printf("Course not found.\n");
-                }
-                break;
-            case 5:
-                displayAllCourses(head);
-                break;
-            case 6:
-                freeCourses(head);
-                exit(0);
-                break;
-            default:
-                printf("Invalid choice. Please try again.\n");
+        printf("Enter Credits: ");
+        scanf("%d", &credits);
+
+        addCourse(head, courseID, courseName, credits);
+        break;
+
+    case 2:
+        printf("Enter Course ID to delete: ");
+        scanf("%d", &courseID);
+        deleteCourse(head, courseID);
+        break;
+    case 3:
+        printf("Enter Course ID to search: ");
+        scanf("%d", &courseID);
+        result = searchCourseByCode(*head, courseID);
+        if (result != NULL)
+        {
+            printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
         }
+        else
+        {
+            printf("Course not found.\n");
+        }
+        break;
+    case 4:
+        printf("Enter Course Name to search: ");
+        scanf("%s", courseName);
+        result = searchCourseByName(*head, courseName);
+        if (result != NULL)
+        {
+            printf("Course found: ID: %d, Name: %s, Credits: %d\n", result->courseID, result->courseName, result->credits);
+        }
+        else
+        {
+            printf("Course not found.\n");
+        }
+        break;
+    case 5:
+        displayAllCourses(*head);
+        break;
+    case 6:
+        freeCourses(*head);
+        exit(0);
+        break;
+    default:
+        printf("Invalid choice. Please try again.\n");
+    }
+}
+
+int main()
+{
+    Course* head = NULL;
+    int choice;
+
+    while (1)
+    {
+        displayMenu();
+        if (scanf("%d", &choice) != 1)
+        {
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n'); // Clear the invalid input from the buffer
+            continue;
+        }
+        handleMenuChoice(choice, &head);
     }
 
     return 0;

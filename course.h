@@ -11,7 +11,10 @@ typedef struct Course {
 
 // Common function declarations
 void addCourse(Course** head, int courseID, const char* courseName, int credits);
-void printCourses(Course* head);
-void freeCourses(Course* head);  // Add this line
+void deleteCourse(Course** head, int courseID);
+Course* searchCourseByCode(Course* head, int courseID);
+Course* searchCourseByName(Course* head, const char* courseName);
+void displayAllCourses(Course* head);
+void freeCourses(Course* head);
 
 #endif // COURSE_H

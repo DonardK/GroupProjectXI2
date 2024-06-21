@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "displayAllCourses.h"
 
-// Function to print the list of courses
 void displayAllCourses(Course* head) {
     Course* current = head;
     while (current != NULL) {

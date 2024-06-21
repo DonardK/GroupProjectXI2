@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "course.h"
+#include "freeCourses.h"
 
 void freeCourses(Course* head) {
     Course* temp;
